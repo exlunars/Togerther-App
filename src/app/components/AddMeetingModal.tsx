@@ -83,7 +83,7 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
         </div>
 
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 flex-shrink-0">
+        <div className="flex items-center justify-between px-5 pt-3 pb-[22px] flex-shrink-0">
           <h2 className="text-lg" style={{ fontWeight: 600 }}>새 모임 만들기</h2>
           <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100">
             <X className="w-4 h-4 text-gray-600" />
@@ -210,7 +210,7 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
               </div>
             )}
             {participants.length === 0 && (
-              <p className="text-xs text-gray-400 mt-1">참여자를 1명 이상 추해주세요</p>
+              <p className="text-xs text-gray-400 mt-1">참여자를 1명 ��상 추해주세요</p>
             )}
           </div>
 
