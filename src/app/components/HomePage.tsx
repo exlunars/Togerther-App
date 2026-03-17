@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Plus, Users, ChevronRight, Wallet, CalendarDays } from 'lucide-react';
+import { Plus, ChevronRight, Wallet, CalendarDays } from 'lucide-react';
 import { useNavigate } from 'react-router';
-import { useMeetings, formatAmount, formatDate, getTotalExpense } from '../store/meetingContext';
+import { useMeetings, formatAmount, formatDate, getTotalExpense, Meeting } from '../store/meetingContext';
 import { AddMeetingModal } from './AddMeetingModal';
-import { Meeting } from '../store/meetingContext';
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -83,10 +82,6 @@ export function HomePage() {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    {/* Emoji badge */}
-                    <div className="absolute top-3 left-3 w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center text-xl shadow-sm">
-                      {meeting.emoji}
-                    </div>
                     {/* Title overlay */}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <h3 className="text-white text-base mb-0.5" style={{ fontWeight: 700 }}>{meeting.title}</h3>

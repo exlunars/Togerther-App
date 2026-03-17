@@ -79,9 +79,6 @@ export function MeetingDetailPage() {
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <div className="max-w-[430px] mx-auto">
             <div className="flex items-end gap-3">
-              <div className="w-12 h-12 bg-white/90 rounded-2xl flex items-center justify-center text-2xl shadow-lg">
-                {meeting.emoji}
-              </div>
               <div>
                 <h1 className="text-white text-xl mb-0.5" style={{ fontWeight: 700 }}>{meeting.title}</h1>
                 <p className="text-white/80 text-sm">{formatDate(meeting.date)}</p>

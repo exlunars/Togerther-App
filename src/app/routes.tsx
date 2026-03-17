@@ -1,3 +1,4 @@
+import React from 'react';
 import { createBrowserRouter, Outlet } from 'react-router';
 import { HomePage } from './components/HomePage';
 import { MeetingDetailPage } from './components/MeetingDetailPage';

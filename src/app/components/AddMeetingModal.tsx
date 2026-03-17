@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
-import { X, Plus, Trash2, Camera } from 'lucide-react';
-import { Meeting, Participant, PARTICIPANT_COLORS } from '../store/meetingContext';
+import React, { useState, useRef } from 'react';
+import { X, Plus, ImagePlus, Check } from 'lucide-react';
+import { Meeting, PARTICIPANT_COLORS } from '../store/meetingContext';
 
 const COVER_IMAGES = [
-  'https://images.unsplash.com/photo-1758272959533-201492a5d36c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1621275471769-e6aa344546d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1674076442296-2e2f3fcb0897?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1650313525283-f505691c3d73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1772380406710-6d9206cb275d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1763951778440-13af353b122a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  'https://images.unsplash.com/photo-1729931597118-e49ddbea68ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  'https://images.unsplash.com/photo-1616786717075-bf6fd2ad6e10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  'https://images.unsplash.com/photo-1532313432596-0362b492b33c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
 ];
-
-const EMOJIS = ['🎉', '🧺', '✈️', '🎂', '🍻', '🎬', '⛺', '🎮', '🏃', '🎤', '🥘', '🌊'];
 
 interface Props {
   onClose: () => void;
@@ -21,10 +16,11 @@ interface Props {
 export function AddMeetingModal({ onClose, onAdd }: Props) {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
-  const [emoji, setEmoji] = useState('🎉');
-  const [selectedCover, setSelectedCover] = useState(0);
+  const [selectedCover, setSelectedCover] = useState<number | null>(0);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [participantName, setParticipantName] = useState('');
   const [participants, setParticipants] = useState<{ name: string; color: string }[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const addParticipant = () => {
     if (!participantName.trim()) return;
@@ -37,6 +33,25 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
     setParticipants(prev => prev.filter((_, i) => i !== idx));
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const result = ev.target?.result as string;
+      setUploadedImage(result);
+      setSelectedCover(null); // 업로드 이미지 선택 시 프리셋 해제
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSelectPreset = (i: number) => {
+    setSelectedCover(i);
+    setUploadedImage(null); // 프리셋 선택 시 업로드 이미지 해제
+  };
+
+  const coverImageUrl = uploadedImage ?? (selectedCover !== null ? COVER_IMAGES[selectedCover] : COVER_IMAGES[0]);
+
   const handleSubmit = () => {
     if (!title.trim()) return;
     if (participants.length < 1) return;
@@ -45,8 +60,8 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
       id: `m-${Date.now()}`,
       title: title.trim(),
       date,
-      coverImage: COVER_IMAGES[selectedCover],
-      emoji,
+      coverImage: coverImageUrl,
+      emoji: '',
       participants: participants.map((p, i) => ({
         id: `p-${Date.now()}-${i}`,
         name: p.name,
@@ -88,31 +103,53 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
             />
           </div>
 
-          {/* Emoji */}
-          <div className="mb-5">
-            <label className="text-sm text-gray-500 mb-2 block">이모지</label>
-            <div className="flex flex-wrap gap-2">
-              {EMOJIS.map(e => (
-                <button
-                  key={e}
-                  onClick={() => setEmoji(e)}
-                  className={`w-10 h-10 text-xl rounded-xl border-2 transition-all ${emoji === e ? 'border-[#6750A4] bg-[#E8DEF8]' : 'border-gray-100 bg-gray-50'}`}
-                >
-                  {e}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Cover Image Selection */}
           <div className="mb-5">
             <label className="text-sm text-gray-500 mb-2 block">커버 이미지</label>
+
+            {/* Upload button */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageUpload}
+            />
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className={`w-full h-24 rounded-xl border-2 border-dashed flex flex-col items-center justify-center gap-1.5 mb-3 transition-all ${
+                uploadedImage
+                  ? 'border-[#6750A4] bg-[#E8DEF8]'
+                  : 'border-gray-200 bg-gray-50 active:bg-gray-100'
+              }`}
+            >
+              {uploadedImage ? (
+                <div className="relative w-full h-full rounded-[10px] overflow-hidden">
+                  <img src={uploadedImage} alt="업로드한 커버" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-[#6750A4]/30 flex items-center justify-center">
+                    <div className="bg-white/90 rounded-full px-3 py-1 flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-[#6750A4]" />
+                      <span className="text-xs text-[#6750A4]" style={{ fontWeight: 600 }}>내 사진 선택됨</span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <ImagePlus className="w-5 h-5 text-gray-400" />
+                  <span className="text-xs text-gray-400">직접 사진 올리기</span>
+                </>
+              )}
+            </button>
+
+            {/* Preset grid */}
             <div className="grid grid-cols-3 gap-2">
               {COVER_IMAGES.map((img, i) => (
                 <button
                   key={i}
-                  onClick={() => setSelectedCover(i)}
-                  className={`relative h-20 rounded-xl overflow-hidden border-2 transition-all ${selectedCover === i ? 'border-[#6750A4] scale-95' : 'border-transparent'}`}
+                  onClick={() => handleSelectPreset(i)}
+                  className={`relative h-20 rounded-xl overflow-hidden border-2 transition-all ${
+                    selectedCover === i ? 'border-[#6750A4] scale-95' : 'border-transparent'
+                  }`}
                 >
                   <img src={img} alt="" className="w-full h-full object-cover" />
                   {selectedCover === i && (
@@ -173,7 +210,7 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
               </div>
             )}
             {participants.length === 0 && (
-              <p className="text-xs text-gray-400 mt-1">참여자를 1명 이상 추가해주세요</p>
+              <p className="text-xs text-gray-400 mt-1">참여자를 1명 이상 추해주세요</p>
             )}
           </div>
 

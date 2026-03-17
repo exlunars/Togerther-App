@@ -69,7 +69,7 @@ const MOCK_MEETINGS: Meeting[] = [
     id: '2',
     title: '홍대 클럽데이',
     date: '2024-01-20',
-    coverImage: 'https://images.unsplash.com/photo-1621275471769-e6aa344546d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    coverImage: 'https://images.unsplash.com/photo-1729931597118-e49ddbea68ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
     emoji: '🎉',
     participants: [
       { id: 'p5', name: '민준', color: '#007AFF' },
@@ -109,7 +109,7 @@ const MOCK_MEETINGS: Meeting[] = [
     id: '3',
     title: '제주도 당일치기',
     date: '2024-02-14',
-    coverImage: 'https://images.unsplash.com/photo-1674076442296-2e2f3fcb0897?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    coverImage: 'https://images.unsplash.com/photo-1616786717075-bf6fd2ad6e10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
     emoji: '✈️',
     participants: [
       { id: 'p8', name: '서연', color: '#4ECDC4' },
@@ -157,7 +157,7 @@ const MOCK_MEETINGS: Meeting[] = [
     id: '4',
     title: '부산 여행',
     date: '2024-04-05',
-    coverImage: 'https://images.unsplash.com/photo-1637494096770-ca167d9d23e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    coverImage: 'https://images.unsplash.com/photo-1532313432596-0362b492b33c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
     emoji: '🌊',
     participants: [
       { id: 'p12', name: '민준', color: '#007AFF' },
@@ -252,7 +252,7 @@ export function formatDate(dateStr: string): string {
   return d.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
 }
 
-const STORAGE_KEY = 'moim-app-meetings-v6';
+const STORAGE_KEY = 'moim-app-meetings-v8';
 
 function loadMeetings(): Meeting[] {
   try {
