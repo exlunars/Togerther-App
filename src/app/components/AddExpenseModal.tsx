@@ -124,7 +124,7 @@ export function AddExpenseModal({ participants, activities, onClose, onAdd }: Pr
                 <button
                   key={p.id}
                   onClick={() => setPaidBy(p.id)}
-                  className={`px-4 py-3 rounded-xl border transition-all ${paidBy === p.id ? 'border-2' : 'border bg-gray-50'}`}
+                  className={`px-4 py-3 rounded-xl border transition-all ${paidBy === p.id ? 'border' : 'bg-gray-50 border-gray-100'}`}
                   style={paidBy === p.id ? {
                     borderColor: p.color,
                     backgroundColor: p.color + '15'
@@ -170,7 +170,7 @@ export function AddExpenseModal({ participants, activities, onClose, onAdd }: Pr
                   <button
                     key={p.id}
                     onClick={() => toggleSplit(p.id)}
-                    className={`px-4 py-3 rounded-xl border transition-all ${isSelected ? 'border-2' : 'border bg-gray-50'}`}
+                    className={`px-4 py-3 rounded-xl border transition-all ${isSelected ? 'border' : 'bg-gray-50 border-gray-100'}`}
                     style={isSelected ? {
                       borderColor: p.color,
                       backgroundColor: p.color + '15'
