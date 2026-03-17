@@ -39,22 +39,13 @@ export function HomePage() {
       <div className="max-w-[430px] mx-auto px-4 py-4">
         {/* Stats banner */}
         {meetings.length > 0 && (
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            <div className="bg-white rounded-2xl p-4 shadow-sm">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-2" style={{ backgroundColor: '#E8DEF8' }}>
+          <div className="mb-6">
+            <div className="bg-white rounded-2xl p-4 shadow-sm flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: '#E8DEF8' }}>
                 <CalendarDays className="w-5 h-5" style={{ color: '#6750A4' }} />
               </div>
-              <p className="text-2xl" style={{ fontWeight: 700, color: '#1D1B20' }}>{meetings.length}</p>
-              <p className="text-xs text-gray-400 mt-0.5">총 모임</p>
-            </div>
-            <div className="bg-white rounded-2xl p-4 shadow-sm">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-2" style={{ backgroundColor: '#D5E8D4' }}>
-                <Wallet className="w-5 h-5" style={{ color: '#006A6A' }} />
-              </div>
-              <p className="text-lg" style={{ fontWeight: 700, color: '#1D1B20' }}>
-                {formatAmount(meetings.reduce((sum, m) => sum + getTotalExpense(m.expenses), 0))}
-              </p>
-              <p className="text-xs text-gray-400 mt-0.5">총 지출</p>
+              <p className="text-xs text-gray-400">총 모임</p>
+              <p className="text-2xl ml-auto" style={{ fontWeight: 700, color: '#1D1B20' }}>{meetings.length}</p>
             </div>
           </div>
         )}

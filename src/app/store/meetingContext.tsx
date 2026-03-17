@@ -66,54 +66,6 @@ export const CATEGORY_COLOR: Record<string, string> = {
 
 const MOCK_MEETINGS: Meeting[] = [
   {
-    id: '1',
-    title: '한강 피크닉',
-    date: '2024-03-01',
-    coverImage: 'https://images.unsplash.com/photo-1758272959533-201492a5d36c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
-    emoji: '🧺',
-    participants: [
-      { id: 'p1', name: '민준', color: '#007AFF' },
-      { id: 'p2', name: '서연', color: '#4ECDC4' },
-      { id: 'p3', name: '지호', color: '#FFD93D' },
-      { id: 'p4', name: '유나', color: '#6C5CE7' },
-    ],
-    activities: [
-      {
-        id: 'a1', time: '11:00', title: '편의점 쇼핑',
-        place: '한강 편의점',
-        memo: '돗자리, 음료, 과자 잔뜩 구매! 지호가 쇼핑카트 끌고 다님 ㅋㅋ',
-        photo: 'https://images.unsplash.com/photo-1710880694444-970aaf7e7f97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-        emoji: '🛒',
-      },
-      {
-        id: 'a2', time: '12:30', title: '한강 피크닉',
-        place: '여의도 한강공원',
-        memo: '날씨 완전 최고! 돗자리 깔고 치맥도 시켜먹고 행복한 시간 ☀️',
-        photo: 'https://images.unsplash.com/photo-1758272959533-201492a5d36c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-        emoji: '🌸',
-      },
-      {
-        id: 'a3', time: '15:00', title: '자전거 타기',
-        place: '한강 자전거길',
-        memo: '다들 열심히 달렸음 ㅋㅋ 지호 넘어질 뻔해서 다들 놀람 😂',
-        emoji: '🚴',
-      },
-      {
-        id: 'a4', time: '17:00', title: '카페 타임',
-        place: '여의도 블루보틀',
-        memo: '마무리 커피 한 잔 ☕ 다음에 또 오자! 최고의 하루였음',
-        photo: 'https://images.unsplash.com/photo-1710880694444-970aaf7e7f97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-        emoji: '☕',
-      },
-    ],
-    expenses: [
-      { id: 'e1', title: '편의점 쇼핑', amount: 48000, paidBy: 'p1', splitWith: ['p1', 'p2', 'p3', 'p4'], category: '식료품', activityId: 'a1' },
-      { id: 'e2', title: '치킨&맥주', amount: 62000, paidBy: 'p2', splitWith: ['p1', 'p2', 'p3', 'p4'], category: '식사', activityId: 'a2' },
-      { id: 'e3', title: '자전거 렌탈', amount: 40000, paidBy: 'p3', splitWith: ['p1', 'p2', 'p3', 'p4'], category: '활동', activityId: 'a3' },
-      { id: 'e4', title: '카페', amount: 28000, paidBy: 'p4', splitWith: ['p1', 'p2', 'p3', 'p4'], category: '카페', activityId: 'a4' },
-    ],
-  },
-  {
     id: '2',
     title: '홍대 클럽데이',
     date: '2024-01-20',
@@ -201,6 +153,52 @@ const MOCK_MEETINGS: Meeting[] = [
       { id: 'e11', title: '간식&쇼핑', amount: 84000, paidBy: 'p11', splitWith: ['p8', 'p9', 'p10', 'p11'], category: '쇼핑' },
     ],
   },
+  {
+    id: '4',
+    title: '부산 여행',
+    date: '2024-04-05',
+    coverImage: 'https://images.unsplash.com/photo-1637494096770-ca167d9d23e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    emoji: '🌊',
+    participants: [
+      { id: 'p12', name: '민준', color: '#007AFF' },
+      { id: 'p13', name: '서연', color: '#4ECDC4' },
+      { id: 'p14', name: '태민', color: '#FF8B94' },
+      { id: 'p15', name: '지호', color: '#FFD93D' },
+      { id: 'p16', name: '채원', color: '#96CEB4' },
+    ],
+    activities: [
+      {
+        id: 'a12', time: '10:00', title: 'KTX 이동',
+        place: '',
+        memo: '부산까지 2시간 반! 기차에서 간식 잔뜩 먹음 🍕',
+        emoji: '🚄',
+      },
+      {
+        id: 'a13', time: '13:00', title: '해운대 해수욕장',
+        place: '',
+        memo: '바다가 너무 예뻐서 다들 사진 찍기 바빴음 📸 파도 진짜 높았음!',
+        emoji: '🏖️',
+      },
+      {
+        id: 'a14', time: '17:00', title: '광안리 회&조개구이',
+        place: '',
+        memo: '신선한 회랑 조개구이 먹으면서 광안대교 야경 감상 🌉 최고였음!',
+        emoji: '🦞',
+      },
+      {
+        id: 'a15', time: '20:00', title: '광안대교 야경',
+        place: '',
+        memo: '야경 진짜 미쳤다... 이런 게 부산이지 ✨',
+        emoji: '🌉',
+      },
+    ],
+    expenses: [
+      { id: 'e12', title: 'KTX 왕복', amount: 275000, paidBy: 'p12', splitWith: ['p12', 'p13', 'p14', 'p15', 'p16'], category: '교통' },
+      { id: 'e13', title: '해운대 카페', amount: 35000, paidBy: 'p13', splitWith: ['p12', 'p13', 'p14', 'p15', 'p16'], category: '카페' },
+      { id: 'e14', title: '회&조개구이', amount: 145000, paidBy: 'p14', splitWith: ['p12', 'p13', 'p14', 'p15', 'p16'], category: '식사' },
+      { id: 'e15', title: '편의점 야식', amount: 28000, paidBy: 'p15', splitWith: ['p12', 'p13', 'p14', 'p15', 'p16'], category: '식료품' },
+    ],
+  },
 ];
 
 export function calculateSettlement(participants: Participant[], expenses: Expense[]): SettlementResult[] {
@@ -254,7 +252,7 @@ export function formatDate(dateStr: string): string {
   return d.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
 }
 
-const STORAGE_KEY = 'moim-app-meetings-v2';
+const STORAGE_KEY = 'moim-app-meetings-v6';
 
 function loadMeetings(): Meeting[] {
   try {

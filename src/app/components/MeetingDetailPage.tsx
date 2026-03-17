@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import {
-  ArrowLeft, Plus, MapPin, Clock, Trash2,
-  ChevronDown, ChevronUp, ArrowRight, Wallet, Users
+  ArrowLeft, Trash2,
+  ChevronDown, ArrowRight, MapPin, Users
 } from 'lucide-react';
 import {
   useMeetings, formatAmount, formatDate, getTotalExpense,
-  calculateSettlement, CATEGORY_EMOJI, CATEGORY_COLOR, Activity
+  calculateSettlement, CATEGORY_EMOJI, CATEGORY_COLOR
 } from '../store/meetingContext';
 import { AddActivityModal } from './AddActivityModal';
 import { AddExpenseModal } from './AddExpenseModal';
@@ -46,22 +46,7 @@ export function MeetingDetailPage() {
 
   const getParticipantById = (id: string) => meeting.participants.find(p => p.id === id);
 
-  // Group expenses by activity
-  const expensesByActivity = new Map<string, typeof meeting.expenses>();
-  const standaloneExpenses: typeof meeting.expenses = [];
-
-  meeting.expenses.forEach(expense => {
-    if (expense.activityId) {
-      const existing = expensesByActivity.get(expense.activityId) || [];
-      expensesByActivity.set(expense.activityId, [...existing, expense]);
-    } else {
-      standaloneExpenses.push(expense);
-    }
-  });
-
-  // Sort activities by time
-  const sortedActivities = [...meeting.activities].sort((a, b) => a.time.localeCompare(b.time));
-  const sortedStandaloneExpenses = [...standaloneExpenses].sort((a, b) => {
+  const sortedExpenses = [...meeting.expenses].sort((a, b) => {
     const timeA = a.time || '';
     const timeB = b.time || '';
     return timeA.localeCompare(timeB);
@@ -106,9 +91,9 @@ export function MeetingDetailPage() {
         </div>
       </div>
 
-      <div className="max-w-[430px] mx-auto">
-        {/* Participants */}
-        <div className="bg-white px-5 py-4 shadow-sm">
+      {/* Participants - full width like image */}
+      <div className="bg-white px-5 py-4 shadow-sm">
+        <div className="max-w-[430px] mx-auto">
           <div className="flex items-center gap-2 mb-3">
             <Users className="w-4 h-4 text-gray-400" />
             <span className="text-sm text-gray-500">{meeting.participants.length}명 참여</span>
@@ -128,7 +113,9 @@ export function MeetingDetailPage() {
             ))}
           </div>
         </div>
+      </div>
 
+      <div className="max-w-[430px] mx-auto">
         {/* Main Content */}
         <div className="px-4 py-5 pb-28 space-y-4">
           {/* Combined Activities & Expenses List */}
@@ -149,96 +136,14 @@ export function MeetingDetailPage() {
               </button>
             </div>
             
-            {(meeting.activities.length === 0 && meeting.expenses.length === 0) ? (
+            {(meeting.expenses.length === 0) ? (
               <div className="text-center py-12">
                 <div className="text-3xl mb-2">📍</div>
                 <p className="text-sm text-gray-400">아직 기록이 없어요</p>
               </div>
             ) : (
               <div className="divide-y divide-gray-50">
-                {/* Activities with linked expenses - only show if has expenses */}
-                {sortedActivities.map(activity => {
-                  const expenses = expensesByActivity.get(activity.id) || [];
-                  if (expenses.length === 0) return null; // Skip activities without expenses
-                  
-                  return (
-                    <div key={activity.id}>
-                      <div className="px-4 py-3">
-                        <div className="flex items-start gap-3">
-                          <div
-                            className="w-9 h-9 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
-                            style={{ backgroundColor: '#E5F1FF' }}
-                          >
-                            {activity.emoji}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-start justify-between gap-2 mb-1">
-                              <h3 className="text-sm" style={{ fontWeight: 600 }}>{activity.title}</h3>
-                              <button
-                                onClick={() => {
-                                  if (confirm('이 장소를 삭제하시겠어요?')) {
-                                    deleteActivity(meeting.id, activity.id);
-                                  }
-                                }}
-                                className="w-6 h-6 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0"
-                              >
-                                <Trash2 className="w-3 h-3 text-gray-400" />
-                              </button>
-                            </div>
-                            {activity.place && (
-                              <div className="flex items-center gap-1.5">
-                                <MapPin className="w-3 h-3 text-gray-400" />
-                                <span className="text-xs text-gray-500">{activity.place}</span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Linked Expenses */}
-                      {expenses.map(expense => {
-                        const payer = getParticipantById(expense.paidBy);
-                        return (
-                          <div key={expense.id} className="border-t border-gray-100 px-4 py-2 bg-gray-50/50">
-                            <div className="flex items-center justify-between ml-2">
-                              <div className="flex items-center gap-2">
-                                {payer && (
-                                  <>
-                                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: payer.color }} />
-                                    <span className="text-sm text-gray-600">{payer.name}</span>
-                                  </>
-                                )}
-                                {expense.place && (
-                                  <>
-                                    <span className="text-gray-300">·</span>
-                                    <span className="text-sm text-gray-500">{expense.place}</span>
-                                  </>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <span className="text-sm" style={{ fontWeight: 600, color: '#B3261E' }}>
-                                  {formatAmount(expense.amount)}
-                                </span>
-                                <button
-                                  onClick={() => {
-                                    if (confirm('이 지출을 삭제하시겠어요?')) {
-                                      deleteExpense(meeting.id, expense.id);
-                                    }
-                                  }}
-                                  className="w-6 h-6 rounded-full bg-white flex items-center justify-center flex-shrink-0"
-                                >
-                                  <Trash2 className="w-3 h-3 text-gray-400" />
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
-                {/* Standalone Expenses */}
-                {sortedStandaloneExpenses.map(expense => {
+                {sortedExpenses.map(expense => {
                   const payer = getParticipantById(expense.paidBy);
                   const isExpanded = expandedExpense === expense.id;
                   return (
@@ -261,12 +166,6 @@ export function MeetingDetailPage() {
                             </span>
                           </div>
                           <div className="flex items-center gap-2">
-                            {expense.place && (
-                              <div className="flex items-center gap-1">
-                                <MapPin className="w-3 h-3 text-gray-400" />
-                                <span className="text-xs text-gray-500">{expense.place}</span>
-                              </div>
-                            )}
                             {payer && (
                               <div className="flex items-center gap-1">
                                 <div className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: payer.color }} />
