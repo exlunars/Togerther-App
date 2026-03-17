@@ -67,7 +67,6 @@ export function AddExpenseModal({ participants, activities, onClose, onAdd }: Pr
         <div className="overflow-y-auto flex-1 px-5 pb-8">
           {/* Amount - big and prominent */}
           <div className="mb-5 bg-[#E8DEF8] rounded-2xl p-5 text-center">
-            <p className="text-sm text-gray-500 mb-2">총 금액</p>
             <div className="flex items-center justify-center gap-1">
               <input
                 type="text"
@@ -107,7 +106,8 @@ export function AddExpenseModal({ participants, activities, onClose, onAdd }: Pr
                 <button
                   key={cat}
                   onClick={() => setCategory(cat)}
-                  className={`px-3 py-1.5 rounded-full text-sm flex items-center gap-1 border transition-all ${category === cat ? 'bg-[#6750A4] text-white border-[#6750A4]' : 'bg-gray-50 text-gray-600 border-gray-100'}`}
+                  className={`px-3 py-1.5 rounded-full text-sm flex items-center gap-1 border transition-all ${category === cat ? 'text-white border-transparent' : 'bg-gray-50 text-gray-600 border-gray-100'}`}
+                  style={category === cat ? { backgroundColor: '#6750A4' } : {}}
                 >
                   <span>{CATEGORY_EMOJI[cat]}</span>
                   <span>{cat}</span>

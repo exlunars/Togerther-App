@@ -119,15 +119,14 @@ export function MeetingDetailPage() {
           <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
             <div className="px-4 py-3 border-b border-gray-50 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" style={{ color: '#6750A4' }} />
                 <p className="text-sm text-gray-500" style={{ fontWeight: 600 }}>
                   장소별 지출
                 </p>
               </div>
               <button
                 onClick={() => setShowAddExpense(true)}
-                className="text-xs px-2.5 py-1 rounded-full" 
-                style={{ backgroundColor: '#E8DEF8', color: '#6750A4', fontWeight: 500 }}
+                className="text-sm px-4 py-1.5 rounded-full" 
+                style={{ backgroundColor: '#6750A4', color: '#ffffff', fontWeight: 500 }}
               >
                 + 지출
               </button>
@@ -183,10 +182,9 @@ export function MeetingDetailPage() {
                       </button>
 
                       {isExpanded && (
-                        <div className="px-4 pb-3 bg-gray-50 space-y-3">
+                        <div className="px-4 py-3 bg-gray-50 space-y-3">
                           <div className="flex items-center justify-between">
                             <div>
-                              <p className="text-xs text-gray-500 mb-1">나눈 인원 ({expense.splitWith.length}명)</p>
                               <div className="flex flex-wrap gap-1">
                                 {expense.splitWith.map(pid => {
                                   const p = getParticipantById(pid);
@@ -241,14 +239,14 @@ export function MeetingDetailPage() {
           {/* Settlement Results */}
           {totalExpense > 0 && settlements.length > 0 && (
             <div className="bg-white rounded-2xl p-4 shadow-sm">
-              <p className="text-sm text-gray-500 mb-3" style={{ fontWeight: 600 }}>정산 결과 🎯</p>
+              <p className="text-sm text-gray-500 mb-3" style={{ fontWeight: 600 }}>정산 결과</p>
               <div className="space-y-3">
                 {settlements.map((s, i) => {
                   const from = getParticipantById(s.fromId);
                   const to = getParticipantById(s.toId);
                   if (!from || !to) return null;
                   return (
-                    <div key={i} className="flex items-center gap-3 p-3 rounded-xl" style={{ backgroundColor: '#F6EDFF' }}>
+                    <div key={i} className="flex items-center gap-3 p-3 rounded-xl" style={{ backgroundColor: '#F5F5F5' }}>
                       <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm text-white flex-shrink-0" style={{ backgroundColor: from.color }}>
                         {from.name[0]}
                       </div>
