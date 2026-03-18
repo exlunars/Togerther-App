@@ -209,9 +209,6 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
                 ))}
               </div>
             )}
-            {participants.length === 0 && (
-              <p className="text-xs text-gray-400 mt-1">참여자를 1명 ��상 추해주세요</p>
-            )}
           </div>
 
           {/* Submit */}
