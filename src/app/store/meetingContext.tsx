@@ -47,9 +47,9 @@ export interface SettlementResult {
 }
 
 export const PARTICIPANT_COLORS = [
-  '#6750A4', '#625B71', '#7D5260', '#6C5B7B',
-  '#B3261E', '#6750A4', '#4A4458', '#8B5A3C',
-  '#006A6A', '#7D5260'
+  '#007AFF', '#4ECDC4', '#FFD93D', '#6C5CE7',
+  '#FF8B94', '#A8E6CF', '#96CEB4', '#FF6B6B',
+  '#45B7D1', '#FDCB6E'
 ];
 
 export const CATEGORY_LIST = ['식사', '카페', '교통', '숙박', '활동', '쇼핑', '식료품', '술', '기타'];

@@ -86,13 +86,6 @@ export function MeetingDetailPage() {
           <ArrowLeft className="w-5 h-5 text-white" />
         </button>
 
-        {/* Delete button */}
-        <button
-          onClick={handleDeleteMeeting}
-          className="absolute top-7 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center"
-        >
-          <Trash2 className="w-4 h-4 text-white" />
-        </button>
 
         {/* Title overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -127,7 +120,7 @@ export function MeetingDetailPage() {
         </div>
 
         {/* Main Content */}
-        <div className="px-4 py-5 pb-28 space-y-4">
+        <div className="px-4 py-5 pb-12 space-y-4">
           {/* Combined Activities & Expenses List */}
           <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
             <div className="px-4 py-3 border-b border-gray-50 flex items-center justify-between">
@@ -371,6 +364,18 @@ export function MeetingDetailPage() {
               </div>
             </div>
           )}
+
+          {/* Delete Button */}
+          <div className="flex justify-center pt-2 pb-4">
+            <button
+              onClick={handleDeleteMeeting}
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-white text-sm active:scale-95 transition-transform"
+              style={{ backgroundColor: '#DC2626', fontWeight: 600 }}
+            >
+              <Trash2 className="w-4 h-4" />
+              삭제
+            </button>
+          </div>
         </div>
       </div>
 

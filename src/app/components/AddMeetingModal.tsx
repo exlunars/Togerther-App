@@ -85,7 +85,7 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
 
         <div className="overflow-y-auto overflow-x-hidden flex-1 px-5 pb-8">
           {/* Title */}
-          <div className="mt-5 mb-5">
+          <div className="mt-5 mb-10">
             <label className="text-sm text-gray-500 mb-2 block">모임 이름 *</label>
             <input
               type="text"
