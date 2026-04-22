@@ -83,7 +83,7 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
           </button>
         </div>
 
-        <div className="overflow-y-auto flex-1 px-5 pb-8">
+        <div className="overflow-y-auto overflow-x-hidden flex-1 px-5 pb-8">
           {/* Title */}
           <div className="mt-5 mb-5">
             <label className="text-sm text-gray-500 mb-2 block">모임 이름 *</label>
@@ -154,7 +154,7 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
                 type="date"
                 value={date}
                 onChange={e => setDate(e.target.value)}
-                className="w-full pl-14 pr-4 py-3 bg-gray-50 rounded-xl border border-gray-100 outline-none focus:border-[#0066FF] transition-colors [&::-webkit-calendar-picker-indicator]:opacity-0"
+                className="w-full pl-14 pr-4 py-3 bg-gray-50 rounded-xl border border-gray-100 outline-none focus:border-[#0066FF] transition-colors [&::-webkit-calendar-picker-indicator]:hidden"
               />
             </div>
           </div>
