@@ -3,12 +3,18 @@ import { X, Plus, Trash2, Camera, CalendarDays } from 'lucide-react';
 import { Meeting, Participant, PARTICIPANT_COLORS } from '../store/meetingContext';
 
 const COVER_IMAGES = [
-  'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1621275471769-e6aa344546d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1674076442296-2e2f3fcb0897?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1650313525283-f505691c3d73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1772380406710-6d9206cb275d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
-  'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  // 밝고 심플한 야외 캠핑 — 자연 속 텐트
+  'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  // 감성 카페창가 — 따뜻한 라떼
+  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  // 밝고 우아한 레스토랑 — 감성 파인다이닝
+  'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  // 핑크 석양 해변 — 감성 여행
+  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  // 파리 야경 — 우아한 도시의 밤
+  'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+  // 루프탑·나이트라이프 — 화려한 밤
+  'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
 ];
 
 const COVER_COLORS = ['#FF6B6B', '#FFB347', '#6C63FF', '#0984E3', '#00B894', '#F368E0'];
