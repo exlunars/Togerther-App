@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { X, Plus, Trash2, CalendarDays } from 'lucide-react';
 import { Meeting, Participant, PARTICIPANT_COLORS } from '../store/meetingContext';
 
@@ -25,6 +25,7 @@ interface Props {
 }
 
 export function AddMeetingModal({ onClose, onAdd }: Props) {
+  const dateInputRef = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [selectedCover, setSelectedCover] = useState(0);
@@ -140,14 +141,20 @@ export function AddMeetingModal({ onClose, onAdd }: Props) {
           <div className="mb-5">
             <label className="text-sm text-gray-500 mb-2 block">날짜 *</label>
             <div className="relative">
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center pointer-events-none" style={{ backgroundColor: '#DBEAFE' }}>
+              <button
+                type="button"
+                onClick={() => dateInputRef.current?.showPicker()}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ backgroundColor: '#DBEAFE' }}
+              >
                 <CalendarDays className="w-4 h-4" style={{ color: '#0066FF' }} />
-              </div>
+              </button>
               <input
+                ref={dateInputRef}
                 type="date"
                 value={date}
                 onChange={e => setDate(e.target.value)}
-                className="w-full pl-14 pr-4 py-3 bg-gray-50 rounded-xl border border-gray-100 outline-none focus:border-[#0066FF] transition-colors"
+                className="w-full pl-14 pr-4 py-3 bg-gray-50 rounded-xl border border-gray-100 outline-none focus:border-[#0066FF] transition-colors [&::-webkit-calendar-picker-indicator]:opacity-0"
               />
             </div>
           </div>
